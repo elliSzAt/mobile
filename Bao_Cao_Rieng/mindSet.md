@@ -4,7 +4,7 @@ Là một khái niệm chỉ tư duy và quan điểm của mỗi cá nhân ho�
 
 ### Tính tò mò, ham học hỏi
 
-Là nền tảng của ngành.
+Là nền tảng của ngành, luôn đặt câu hỏi tại sao.
 
  - Luôn khám phá điều mới.
  - Tự học và cập nhật kiến thức.
