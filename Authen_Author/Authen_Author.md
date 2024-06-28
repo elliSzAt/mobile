@@ -1,6 +1,6 @@
 # Authentication and Authorization
 
-![alt text](1_5hECqmkKMLLwFQyF2P424A-1.webp)
+![alt text](image.png)
 
 ### Authentication
 
@@ -12,7 +12,7 @@ Simply, ``authentication`` is the process of proving some information is true.
 
 This is how ``authentication`` works.
 
-[text](vscode-local:/)
+![alt text](image-1.png)
 
 ### Authorization
 
