@@ -1,6 +1,6 @@
 # Authentication and Authorization
 
-![alt text](1_5hECqmkKMLLwFQyF2P424A.webp)
+![alt text](1_5hECqmkKMLLwFQyF2P424A-1.webp)
 
 ### Authentication
 
