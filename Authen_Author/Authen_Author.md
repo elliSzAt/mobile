@@ -1,6 +1,6 @@
 # Authentication and Authorization
 
-![alt text](image.png)
+![alt text](/Authen_Author/images/image.png)
 
 ### Authentication
 
@@ -8,11 +8,11 @@ Simply, ``authentication`` is the process of proving some information is true.
 
 ``Authentication`` is a process of proving a user's identity by providing their ``credentials`` which explains who you are to the system.
 
-![alt text](1_jeDPVfFFHwlnPbOOKzUzSw.gif)
+![alt text](/Authen_Author/images/1_jeDPVfFFHwlnPbOOKzUzSw.gif)
 
 This is how ``authentication`` works.
 
-![alt text](image-1.png)
+![alt text](/Authen_Author/images/image-1.png)
 
 ### Authorization
 
@@ -34,7 +34,7 @@ Single-Factor ``Authentication`` is the most common form of ``authentication``, 
 
 Two-factor ``Authentication`` is the ``authentication`` method that is slowly gaining popularity in the world. After ``authentication`` (credentials), the client is asked to provide another information (``OTP``) for validating the client.
 
-![alt text](image-2.png)
+![alt text](/Authen_Author/images/image-2.png)
 
 Factor 1: 
 
@@ -60,7 +60,7 @@ def login_2fa_form():    secret = request.form.get("secret")
 
 ### SSO (Single-Sign-On)
 
-![alt text](image-3.png)
+![alt text](/Authen_Author/images/image-3.png)
 
 # Commonly used authorization types
 
@@ -84,7 +84,7 @@ Authorization: Basic ZGFuaWVsOnBhc3N3b3Jk
 
 ### OAuth
 
-![alt text](image-4.png)
+![alt text](/Authen_Author/images/image-4.png)
 
 This technology to let users to exchange information about their accounts with third-party applications or websites. OAuth is a protocol that allows an authorization server to provide access tokens to third-party clients with the permission of the resource owner.
 
