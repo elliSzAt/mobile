@@ -134,7 +134,7 @@ file_path = 'hash_passwd.txt'
 hash_each_line(file_path)
 ```
 
-![alt text](image-7.png)
+![alt text](/Authen_Author/images/image-7.png)
 
 Finally, just brute-force with ``Burp intruder`` to find correct value.
 
