@@ -61,57 +61,57 @@ if ($count == 1) {
 
 If the ``username`` does not exist, it will return ``Wrong username!``.
 
-![alt text](/Authen_Author/images/j0q3fp2.png)
+![alt text](/Authen_Author/image/j0q3fp2.png)
 
 If ``username`` found but wrong ``password`` it will return ``Wrong password!``.
 
-![alt text](/Authen_Author/images/7YWxciY.png)
+![alt text](/Authen_Author/image/7YWxciY.png)
 
 So the solution is we first brute-force the ``username`` to find the exact username then we brute-force the ``password``.
 
-![alt text](/Authen_Author/images/7HsJCIl.png)
+![alt text](/Authen_Author/image/7HsJCIl.png)
 
 The credentials is ``ec2-user:computer``.
 
 ### Multi-factor authentication
 
-![alt text](/Authen_Author/images/nTofOv3.png)
+![alt text](/Authen_Author/image/nTofOv3.png)
 
 In this case, we are provided a valid credential, we need to bypass the 2FA mechanism. It has a webmail to recieve 2FA code of user ``wiener``.
 
-![alt text](/Authen_Author/images/3RYhcBp.png)
+![alt text](/Authen_Author/image/3RYhcBp.png)
 
 First, we log into ``wiener:peter``, take requests to understand the mechanism of the application.
 
-![alt text](/Authen_Author/images/beufMOK.png)
+![alt text](/Authen_Author/image/beufMOK.png)
 
 After login at ``/login``, it will redirect to ``/login2`` to verify 2FA code. Send with header Cookie ``verify=wiener``.
 
-![alt text](/Authen_Author/images/mK9BDcY.png)
+![alt text](/Authen_Author/image/mK9BDcY.png)
 
 We test by send many requests and know that the application does not block brute-force attacks. Morever, ``mfa-code`` include four random numbers so we can perform a brute-force attack after change the value of cookie to ``verify=carlos``.
 
-![alt text](/Authen_Author/images/zyKDdq6.png)
+![alt text](/Authen_Author/image/zyKDdq6.png)
 
 ### Other authentication mechanisms
 
-![alt text](/Authen_Author/images/Uuwjwdw.png)
+![alt text](/Authen_Author/image/Uuwjwdw.png)
 
 Like the previous lab, update to add ``Stay logged in`` function. First, login with ``wiener`` account.
 
-![alt text](/Authen_Author/images/oud0pya.png)
+![alt text](/Authen_Author/image/oud0pya.png)
 
 The application will remember the ``login`` by cookie with value ``stay-logged-in=d2llbmVyOjUxZGMzMGRkYzQ3M2Q0M2E2MDExZTllYmJhNmNhNzcw``
 
-![alt text](/Authen_Author/images/ZzMnMSN.png)
+![alt text](/Authen_Author/image/ZzMnMSN.png)
 
 Analyst the value of the cookie, maybe it is ``Base64`` encode. The value after decode is ``wiener:51dc30ddc473d43a6011e9ebba6ca770``.
 
-![alt text](/Authen_Author/images/image-5.png)
+![alt text](/Authen_Author/image/image-5.png)
 
 We found that ``51dc30ddc473d43a6011e9ebba6ca770`` is a common format, maybe ``hash encrypt``. After decrypt, the value will be ``peter``.
 
-![alt text](/Authen_Author/images/image-6.png)
+![alt text](/Authen_Author/image/image-6.png)
 
 So we can understand the mechanism create cookie is ``hash`` the password and then ``encode base64`` with the format ``username:hash``. Here is my code to create a list value of cookie to brute-force.
 
@@ -134,11 +134,11 @@ file_path = 'hash_passwd.txt'
 hash_each_line(file_path)
 ```
 
-![alt text](/Authen_Author/images/image-7.png)
+![alt text](/Authen_Author/image/image-7.png)
 
 Finally, just brute-force with ``Burp intruder`` to find correct value.
 
-![alt text](/Authen_Author/images/vWFMnfQ.png)
+![alt text](/Authen_Author/image/vWFMnfQ.png)
 
 # How to prevent?
 
