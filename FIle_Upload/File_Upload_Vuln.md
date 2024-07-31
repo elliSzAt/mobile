@@ -8,9 +8,9 @@
 
   Lỗ hổng chạy Script file upload xảy ra khi thỏa mãn những điều kiện sau:  
 
-    File upload được lưu vào public directory  
+ - File upload được lưu vào public directory  
 
-    Có thể upload các file script  
+ - Có thể upload các file script  
 
   Đối với uploader, khi tạo ra một ứng dụng phù hợp hai điều kiện trên thì sẽ trở thành nguyên nhân sinh ra lỗ hổng. Vì thế, việc không thỏa mãn ít nhất một trong hai điều kiện nêu trên trở thành đối sách giải quyết của lỗ hổng này.
   
@@ -18,9 +18,9 @@
   
   Ảnh hưởng của lỗ hổng file upload phụ thuộc vào hai yếu tố chính:  
 
-    Phần của file mà trang web không thể xác định được đúng cách  
+ - Phần của file mà trang web không thể xác định được đúng cách  
 
-    Những hạn chế được áp dụng lên file sau khi đã upload thành công  
+ - Những hạn chế được áp dụng lên file sau khi đã upload thành công  
 
   Trường hợp kích thước của tệp nằm ngoài ngưỡng dự kiến có thể kích hoạt tấn công DoS, attacker có thể tấn công lấp đầy không gian đĩa có sẵn.  
 
@@ -30,11 +30,11 @@
 
   Tóm lại, lỗ hổng file upload xảy ra có thể:  
 
-    Làm lộ các thông tin nội bộ, chẳng hạn như đường dẫn của máy chủ  
+ - Làm lộ các thông tin 
 
-    Là tiền đề dẫn đến các lỗ hổng khác  
+ - Là tiền đề dẫn đến các lỗ hổng khác  
 
-    Khiến attacker chiếm quyền điều khiển hệ thống  
+ - RCE
 
 # Khai thác lỗ hổng File Upload:  
 
