@@ -61,7 +61,7 @@ c) Bypass Check the blacklisted
   
 ![image](https://user-images.githubusercontent.com/125866921/227199062-b6671451-d105-420f-90d0-291d9f75383b.png)
 
-  Bypass qua filter này có thể Upload file có đuôi .php3, .php4, .php5, .pHp, ... Lúc đó tôi đã tự đặt ra câu hỏi là tại sao lại có những số 3 4 5 (ở các tài liệu đọc được).    
+  Bypass qua filter này có thể Upload file có đuôi .php3, .php4, .php5, .pHp, ... 
   
 d. Bypass Check the whitelisted  
 
