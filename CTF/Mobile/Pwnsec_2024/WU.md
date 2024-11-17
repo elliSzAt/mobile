@@ -58,7 +58,7 @@ FLAG: PWNSEC{Y0uR_F!r3_L4ck5_d!sciplin3}
 
 Hàm ``Password`` sẽ lấy các chuỗi từ ``strings.xml`` và từ các chuỗi này sẽ được chuyển vào ``generateRandomStrings``, hàm này được gọi lên từ native library ``firestorm``. Tuy nhiên hàm ``Password`` chưa được gọi, vì vậy mình cần dùng frida hook vào hàm để lấy giá trị của ``password``.
 
-``` java
+``` javascript
 Java.perform(function() {
     function getPassword() {
         Java.choose('com.pwnsec.firestorm.MainActivity', {
@@ -172,3 +172,101 @@ Kiểm tra ``logcat`` vì như đã nói flag sẽ được xuất ra ở trong 
 ```
 FLAG: PWNSEC{W3'r3_N0t_T00l5_0f_The_g0v3rnm3n7_0R_4ny0n3_3ls3}
 ```
+
+# 5. Bonus for Snake
+
+Script 1:
+
+```javascript
+setImmediate(
+    Java.perform(function() {
+        if (Java.classFactory.tempFileNaming.prefix == 'frida') {
+            Java.classFactory.tempFileNaming.prefix = 'fuckyou';
+          }
+        let MainActivity = Java.use("com.pwnsec.snake.MainActivity");
+        MainActivity["isDeviceRooted"].implementation = function (context) {
+            console.log(`MainActivity.isDeviceRooted is called: context=${context}`);
+            // let result = this["isDeviceRooted"](context);
+            // console.log(`MainActivity.isDeviceRooted result=${result}`);
+            let BigBoss = Java.use("com.pwnsec.snake.BigBoss");
+            BigBoss["stringFromJNI"].implementation = function (str) {
+                console.log(`BigBoss.stringFromJNI is called: str=${str}`);
+                let result = this["stringFromJNI"](str);
+                console.log(`BigBoss.stringFromJNI result=${result}`);
+                return result;
+            };
+            var bb = BigBoss.$new("Snaaaaaaaaaaaaaake");
+            return false;
+        };
+        
+        var frida = 0;
+        Interceptor.attach(Module.findExportByName("libc.so", "strstr"), {
+            onEnter: function(args) {
+                console.log("strstr attached onEnter...");
+                var arg_2 = Memory.readCString(ptr(args[1])).toString();
+                console.log(`strstr(${Memory.readCString(ptr(args[0]))})`);
+                console.log(`strstr(${arg_2})`);
+                if (arg_2 == "frida" || arg_2.includes(":69")) {
+                    frida = 1;
+                }
+            },
+            onLeave: function(ret) {
+                if (frida == 1) {
+                    ret.replace(0);
+                }
+                console.log(`strstr attached onLeave... -> ${ret}`);
+                frida = 0
+            }
+        })
+    })
+)
+```
+
+Script 2:
+
+```javascript
+function hook_pthread_create(){
+    var pt_create_func = Module.findExportByName(null,'pthread_create');
+    var detect_frida_loop_addr = null;
+    console.log('pt_create_func:',pt_create_func);
+ 
+   Interceptor.attach(pt_create_func,{
+       onEnter:function(arg){
+        console.log(arg[2]);
+           if(detect_frida_loop_addr == null)
+           {
+                var base_addr = Module.getBaseAddress('libsnake.so');
+                detect_frida_loop_addr = base_addr.add(0x0000000000062650)
+                console.log(base_addr)
+                console.log(detect_frida_loop_addr)
+                if(base_addr != null){
+                    
+                    console.log('this.context.eax: ', detect_frida_loop_addr , this.context.eax);
+                    if(this.context.eax.compare(detect_frida_loop_addr) == 0) {
+                        hook_anti_frida_replace(this.context.eax);
+                    }
+                }
+ 
+           }
+ 
+       },
+       onLeave : function(retval){
+           console.log('retval',retval);
+       }
+   })
+}
+function hook_anti_frida_replace(addr){
+    console.log('replace anti_addr :',addr);
+    Interceptor.replace(addr,new NativeCallback(function(a1){
+        console.log('replace success');
+        return;
+    },'pointer',[]));
+ 
+}
+
+hook_pthread_create();
+```
+
+Tham khảo:
+
+[bypass_frida](https://github.com/xiaokanghub/Android?tab=readme-ov-file#bypass-frida-detection)
