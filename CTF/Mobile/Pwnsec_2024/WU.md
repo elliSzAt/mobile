@@ -149,7 +149,7 @@ Nhưng vấn đề chính ở đây là làm sao để gọi được hàm này,
 
 Ta nhìn vào file yaml, nó được load bởi thư viện ``snakeyaml`` và nó sử dụng phiên bản có chưa lỗ hổng ``Deserialization``.
 
-[CVE-2022-1471](#https://www.greynoise.io/blog/cve-2022-1471-snakeyaml-deserialization-deep-dive?source=post_page-----1b373affd69b--------------------------------)
+[CVE-2022-1471](https://www.greynoise.io/blog/cve-2022-1471-snakeyaml-deserialization-deep-dive?source=post_page-----1b373affd69b--------------------------------)
 
 Do đó mình cần tạo payload trong ``skull_Face.yml``, nó sẽ gọi đến class ``BigBoss`` và chuyển chuỗi ``Snaaaaaaaaaaaaaake`` vào.
 
