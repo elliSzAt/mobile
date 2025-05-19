@@ -144,5 +144,6 @@ Nên mình tìm kiếm chuỗi ``0x14130817005A0E08`` để xem rõ hơn các k�
 
 Và đây rồi, nó xuất hiện đầy đủ ở đây, bây giờ ta sẽ xor chuỗi hex này với key ban đầu.
 ![image](https://github.com/user-attachments/assets/7fbe3afe-41f7-4351-a37c-47f2a1685881)
+![image](https://github.com/user-attachments/assets/d7681b5a-ba35-4522-b083-c534c4bf0f1f)
 
 Tìm được chuỗi ``making owasp great again``, và đây chính là flag hehe ~ ~
