@@ -115,3 +115,34 @@ Khi khởi động ứng dụng thì frida sẽ hook vào hàm ``strstr``, ``onE
 Cuối cùng là ``onLeave`` sau khi hàm ``strstr`` kết thúc, nó sẽ sửa đổi giá trị kết quả của hàm sao cho kết quả trả về luôn đúng.
 
 ![image](https://github.com/user-attachments/assets/9b796d84-4707-42de-847a-badcfd7c7eb5)
+
+Quay lại với việc phân tích apk.
+![image](https://github.com/user-attachments/assets/644135d5-fd19-4b4b-bb64-adcd7ceb567f)
+
+Ngay đầu của ``MainActivity`` thì ta thấy được 1 ``xorkey`` được hardcode.
+![image](https://github.com/user-attachments/assets/d0eb0304-81a3-42ed-bf78-42f294bd76fb)
+
+Tiếp theo biến này được đưa vào trong hàm ``init`` của ``libfoo.so``.
+![image](https://github.com/user-attachments/assets/d5a26c80-e958-4cd0-a9cb-7f6c2b8be2d3)
+
+Key được đưa vào như biến ``*v5`` và sau đó là thực hiện cả đống phép tính gì đó rồi copy giá trị ``*v5`` vào ``qword_15038``.
+Có thể nó để dành để làm việc gì đó sau này, nên tạm thời cứ để đó.
+![image](https://github.com/user-attachments/assets/0fd26cf9-dee4-487a-a331-34f799675514)
+
+Tiếp tục kiểm tra apk thì thấy có hàm ``check.code``.
+![image](https://github.com/user-attachments/assets/57e7aad4-a52c-4192-b333-421286492fbf)
+
+Vào xem thì tiếp tục nó lại gọi đến ``CodeCheck_bar`` trong thư viện C.
+![image](https://github.com/user-attachments/assets/8662a01e-89be-48f0-ba85-b380fe07d7d4)
+
+Tiếp theo nó sẽ đi đến hàm ``sub_10E0`` để kiểm tra gì đó.
+![image](https://github.com/user-attachments/assets/dbaf48ad-f4d4-4c78-9034-f6158dca60ac)
+
+Kéo xuống cuối cùng thì thấy có chuỗi hex khả nghi, nhưng các phép tính bên trên hình như không đầy đủ thì phải.
+Nên mình tìm kiếm chuỗi ``0x14130817005A0E08`` để xem rõ hơn các kí tự còn lại.
+![image](https://github.com/user-attachments/assets/1b5dbb46-216d-48ed-916c-6704bc2a58e7)
+
+Và đây rồi, nó xuất hiện đầy đủ ở đây, bây giờ ta sẽ xor chuỗi hex này với key ban đầu.
+![image](https://github.com/user-attachments/assets/7fbe3afe-41f7-4351-a37c-47f2a1685881)
+
+Tìm được chuỗi ``making owasp great again``, và đây chính là flag hehe ~ ~
